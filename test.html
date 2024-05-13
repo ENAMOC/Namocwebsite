@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Website</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+  /* General styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: transparent; /* Transparent background */
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  display: flex; /* Display as flex */
+  justify-content: left; /* Space content evenly */
+  align-items: center; /* Center align items vertically */
+}
+
+
+header .logo {
+  
+}
+
+  
+
+
+/* Blur effect when scrolling past the header */
+.scroll-blur {
+  backdrop-filter: blur(10px); /* Add blur effect */
+  background-color: transparent; /* Adjust transparency */
+}
+
+nav {
+  padding: 5px 0;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+main {
+  padding: 20px;
+}
+
+section {
+  margin-bottom: 20px;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.home {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url("../image/main.jpg");
+  background-position: bottom center;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.navbar-toggle {
+  display: none;
+}
+
+
+  .home .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.5); /* Adjust the alpha value for transparency */
+            backdrop-filter: blur(1px);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .create-account {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .create-account a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+header .logo img {
+  width: 50px;
+}
+
+
+
+
+
+
+
+@media screen and (max-width: 768px) {
+  
+   header {
+    padding: 5px; /* Adjust padding for smaller screens */
+    height: 50px;
+  }
+  
+
+  
+  
+
+  nav ul {
+  display: none;
+  position:absolute;
+  top: 100%; /* Position below the header */
+  left: 0;
+  width: 100%;
+  text-align: right; /* Align text to the right */
+  backdrop-filter: blur(10px); /* Add blur effect */
+}
+
+
+  nav ul.open {
+    display: block;
+  }
+
+  nav ul li {
+    display: block;
+    margin: 10px 0;
+    margin-right: 20px;
+  }
+
+  .navbar-toggle {
+    display: block;
+    position: absolute;
+    top: 50%; /* Position in the middle of the header */
+    right: 20px;
+    transform: translateY(-50%);
+    font-size: 20px;
+  }
+}
+
+</style>
+
+<body>
+
+<header>
+  <div class="logo">
+    <img src="../image/logo.png" alt="Logo">
+  </div>
+
+  
+  
+  
+  
+</header>
+
+<div class="home">
+  
+  
+  
+  <div class="container">
+    <h2>User Login</h2>
+    <form id="loginForm" action="#" method="POST">
+        <input type="text" id="username" name="username" placeholder="Username" required>
+        <input type="password" id="password" name="password" placeholder="Password" required>
+        <input type="submit" value="Login">
+    </form>
+    <div class="create-account">
+         <span>Already have an account? <a href="../user_registerfinal.html">Create here</a></span><br><br> 
+        <span>Switch to <a href="../admin_loginfinal.html">Admin</a></span>
+    </div>
+</div>
+
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+<footer>
+  <p>&copy; 2024, Namoc Website. All rights reserved.</p>
+</footer>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyCdvETmJITLCx0eg_q30LJur1yThCuuLMo",
+    authDomain: "ecommerce-5f863.firebaseapp.com",
+    databaseURL: "https://ecommerce-5f863-default-rtdb.firebaseio.com",
+    projectId: "ecommerce-5f863",
+    storageBucket: "ecommerce-5f863.appspot.com",
+    messagingSenderId: "391256408389",
+    appId: "1:391256408389:web:9a2a093e3a7449d9a47e2c"
+  };
+  
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  // Get a reference to the database service
+  const database = firebase.database();
+
+  // Handle form submission
+  document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent default form submission behavior
+
+      // Get form values
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      // Retrieve data from Firebase
+      database.ref('users').orderByChild('username').equalTo(username).once('value')
+        .then(snapshot => {
+          if (snapshot.exists()) {
+            snapshot.forEach(childSnapshot => {
+              const userData = childSnapshot.val();
+              const storedPassword = userData.password;
+              if (password === storedPassword) {
+                alert("Successfully login.");            
+                window.location.href = "../user_welcomefinal.html";
+              } else {
+                alert("Sorry, password incorrect."); // Display failure message
+              }
+            });
+          } else {
+            alert("Sorry, username not found."); // Display failure message
+          }
+        })
+        .catch(error => {
+          console.error("Error retrieving data from Firebase: ", error);
+        });
+
+      // Clear form inputs after submission
+      document.getElementById("username").value = "";
+      document.getElementById("password").value = "";
+    });
+  });
+
+  // Merge with existing JavaScript
+  document.addEventListener("DOMContentLoaded", function() {
+    const navbarToggle = document.querySelector(".navbar-toggle");
+    const navLinks = document.querySelector("nav ul");
+    const header = document.querySelector("header");
+
+    navbarToggle.addEventListener("click", function() {
+      navLinks.classList.toggle("open"); // Toggle the 'open' class
+    });
+
+    window.addEventListener("scroll", function() {
+      if (window.scrollY > header.offsetTop) {
+        header.classList.add("scroll-blur");
+      } else {
+        header.classList.remove("scroll-blur");
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

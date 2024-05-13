@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Product</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"],
+        input[type="file"],
+        select,
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .back-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Upload Product</h2>
+    <form id="productForm" action="#" method="POST">
+        <input type="text" id="description" name="description" placeholder="Description" required>
+        <input type="number" id="quantity" name="quantity" placeholder="Quantity" required>
+        <input type="number" id="price" name="price" placeholder="Price" required>
+        <select id="category" name="category" required>
+            <option value="" disabled selected>Select category</option>
+            <option value="Seats">Seats</option>
+            <option value="Tables">Tables</option>
+            <option value="Storage">Storage</option>
+            <option value="Desks">Desks</option>
+            <option value="Shelves">Shelves</option>
+            <option value="Bed">Bed</option>
+            <!-- Add more options as needed -->
+        </select>
+        <input type="file" id="photo" name="photo" accept="image/*" required>
+        <input type="submit" value="Upload">
+    </form>
+</div>
+
+<!-- Include Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+<script>
+  // Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyCdvETmJITLCx0eg_q30LJur1yThCuuLMo",
+    authDomain: "ecommerce-5f863.firebaseapp.com",
+    databaseURL: "https://ecommerce-5f863-default-rtdb.firebaseio.com",
+    projectId: "ecommerce-5f863",
+    storageBucket: "ecommerce-5f863.appspot.com",
+    messagingSenderId: "391256408389",
+    appId: "1:391256408389:web:9a2a093e3a7449d9a47e2c"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  // Get a reference to the database service
+  const database = firebase.database();
+  const storage = firebase.storage();
+
+  // Handle form submission
+  document.getElementById("productForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent default form submission behavior
+
+    // Get form values
+    const description = document.getElementById("description").value;
+    const quantity = document.getElementById("quantity").value;
+    const price = document.getElementById("price").value;
+    const category = document.getElementById("category").value;
+    const photo = document.getElementById("photo").files[0]; // Get the selected photo
+
+    // Storage reference
+    const storageRef = storage.ref('product_photos/' + photo.name);
+
+    // Upload photo to Firebase Storage
+    const uploadTask = storageRef.put(photo);
+
+    // After photo upload completes
+    uploadTask.on('state_changed', 
+      (snapshot) => {
+        // Track upload progress
+      }, 
+      (error) => {
+        console.error('Error uploading photo:', error);
+      }, 
+      () => {
+        // Photo uploaded successfully, now get its download URL
+        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+          // Save data to Firebase Database
+          database.ref('products').push({
+            description: description,
+            quantity: quantity,
+            price: price,
+            category: category,
+            photoURL: downloadURL // Save photo download URL
+          });
+          // Clear form inputs after submission
+          document.getElementById("description").value = "";
+          document.getElementById("quantity").value = "";
+          document.getElementById("price").value = "";
+          document.getElementById("category").selectedIndex = 0;
+          document.getElementById("photo").value = "";
+          alert("Product uploaded successfully!"); // Display success message
+        });
+      }
+    );
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .summary-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .summary-item {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="summary-container">
+    <h1>Order Summary</h1>
+    <div id="summaryItems">
+        <!-- Transaction details will be dynamically added here -->
+    </div>
+</div>
+
+<!-- Include Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<script>
+    // Firebase configuration
+    const firebaseConfig = {
+    apiKey: "AIzaSyCdvETmJITLCx0eg_q30LJur1yThCuuLMo",
+    authDomain: "ecommerce-5f863.firebaseapp.com",
+    databaseURL: "https://ecommerce-5f863-default-rtdb.firebaseio.com",
+    projectId: "ecommerce-5f863",
+    storageBucket: "ecommerce-5f863.appspot.com",
+    messagingSenderId: "391256408389",
+    appId: "1:391256408389:web:9a2a093e3a7449d9a47e2c"
+  };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // Get a reference to the database service
+    const database = firebase.database();
+
+    // Function to fetch transaction data from the checkout database and display summary
+    function displaySummary() {
+        const summaryItemsContainer = document.getElementById('summaryItems');
+
+        // Fetch transaction data from the checkout database
+        firebase.database().ref('checkout').once('value')
+            .then(function(snapshot) {
+                const transactions = snapshot.val();
+                if (transactions) {
+                    // Iterate through each transaction and display summary
+                    Object.keys(transactions).forEach(key => {
+                        const transaction = transactions[key];
+                        const transactionDiv = document.createElement('div');
+                        transactionDiv.classList.add('summary-item');
+                        transactionDiv.innerHTML = `
+                            <p><strong>Transaction ID:</strong> ${key}</p>
+                            <p><strong>Total Amount:</strong> P${transaction.totalAmount.toFixed(2)}</p>
+                            <p><strong>Payment Method:</strong> ${transaction.paymentMethod}</p>
+                            <p><strong>Date:</strong> ${new Date(transaction.timestamp).toLocaleString()}</p>
+                            <hr>
+                        `;
+                        summaryItemsContainer.appendChild(transactionDiv);
+                    });
+                } else {
+                    summaryItemsContainer.innerHTML = '<p>No transactions found.</p>';
+                }
+            })
+            .catch(function(error) {
+                console.error('Error fetching transaction data:', error);
+                summaryItemsContainer.innerHTML = '<p>Error fetching transaction data.</p>';
+            });
+    }
+
+    // Call the function to display summary when the page is loaded
+    displaySummary();
+</script>
+
+</body>
+</html>

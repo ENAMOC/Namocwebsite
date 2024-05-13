@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Website</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Add any additional styles here */
+ 
+ body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: transparent; /* Transparent background */
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  display: flex; /* Display as flex */
+  justify-content: space-evenly; /* Space content evenly */
+  align-items: center; /* Center align items vertically */
+}
+
+
+header .logo {
+    margin-left: -100px;
+}
+
+  
+
+
+/* Blur effect when scrolling past the header */
+.scroll-blur {
+  backdrop-filter: blur(10px); /* Add blur effect */
+  background-color: transparent; /* Adjust transparency */
+}
+
+nav {
+  padding: 5px 0;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+main {
+  padding: 20px;
+}
+
+section {
+  margin-bottom: 20px;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.home {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url("../image/main.jpg");
+  background-position: bottom center;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.navbar-toggle {
+  display: none;
+}
+
+
+  .home .container {
+            width:80%;
+            margin: 50px auto;
+            margin-top: -500px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="number"],
+        input[type="file"],
+        select,
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .back-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        
+        
+header .logo img {
+  width: 50px;
+  margin-left: -80px;
+}
+
+
+
+
+
+
+@media screen and (max-width: 768px) {
+  
+   header {
+    padding: 5px; /* Adjust padding for smaller screens */
+    height: 50px;
+  }
+  
+  header .logo {
+    margin-left: -100px;
+}
+
+  
+  
+
+  nav ul {
+  display: none;
+  position:absolute;
+  top: 100%; /* Position below the header */
+  left: 0;
+  width: 100%;
+  text-align: right; /* Align text to the right */
+  backdrop-filter: blur(10px); /* Add blur effect */
+}
+
+
+  nav ul.open {
+    display: block;
+  }
+
+  nav ul li {
+    display: block;
+    margin: 10px 0;
+    margin-right: 20px;
+  }
+
+  .navbar-toggle {
+    display: block;
+    position: absolute;
+    top: 50%; /* Position in the middle of the header */
+    right: 20px;
+    transform: translateY(-50%);
+    font-size: 20px;
+  }
+  
+  
+  
+    .home .container {
+      width: 80%;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  
+  
+  
+  
+  
+  
+}
+
+
+ 
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+      <img src="../image/logo.png" alt="Logo">
+    </div>
+  
+  <nav>
+    <div class="navbar-toggle">&#9776;</div> <!-- Toggle Button -->
+     <ul>
+         <li><a href="../admin_welcome.html">Home</a></li>
+         <li><a href="../admin_finalproduct.html">Products</a></li>
+         <li><a href="../admin_finalupload.html">Upload</a></li>
+         <li><a href="../admin_finaledit.html">Edit & Delete</a></li>
+         <li><a href="../admin_summarysales.html">Sales</a></li>
+         <li><a href="../admin_loginfinal.html">Logout</a></li>
+       </ul>
+  </nav>
+</header>
+
+<!-- Place the form here -->
+<div class="home">
+<div class="container">
+    <h2>Upload Product</h2>
+    <form id="productForm" action="#" method="POST">
+        <input type="text" id="description" name="description" placeholder="Description" required>
+        <input type="number" id="quantity" name="quantity" placeholder="Quantity" required>
+        <input type="number" id="price" name="price" placeholder="Price" required>
+        <select id="category" name="category" required>
+            <option value="" disabled selected>Select category</option>
+            <option value="Seats">Seats</option>
+            <option value="Tables">Tables</option>
+            <option value="Storage">Storage</option>
+            <option value="Desks">Desks</option>
+            <option value="Shelves">Shelves</option>
+            <option value="Bed">Bed</option>
+            <!-- Add more options as needed -->
+        </select>
+        <input type="file" id="photo" name="photo" accept="image/*" required>
+        <input type="submit" value="Upload">
+    </form>
+</div>
+</div>
+
+<footer>
+  <p>&copy; 2024, Namoc Website. All rights reserved.</p>
+</footer>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+<script>
+  // Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyCdvETmJITLCx0eg_q30LJur1yThCuuLMo",
+    authDomain: "ecommerce-5f863.firebaseapp.com",
+    databaseURL: "https://ecommerce-5f863-default-rtdb.firebaseio.com",
+    projectId: "ecommerce-5f863",
+    storageBucket: "ecommerce-5f863.appspot.com",
+    messagingSenderId: "391256408389",
+    appId: "1:391256408389:web:9a2a093e3a7449d9a47e2c"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  // Get a reference to the database service
+  const database = firebase.database();
+  const storage = firebase.storage();
+
+  // Handle form submission
+  document.getElementById("productForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent default form submission behavior
+
+    // Get form values
+    const description = document.getElementById("description").value;
+    const quantity = document.getElementById("quantity").value;
+    const price = document.getElementById("price").value;
+    const category = document.getElementById("category").value;
+    const photo = document.getElementById("photo").files[0]; // Get the selected photo
+
+    // Storage reference
+    const storageRef = storage.ref('product_photos/' + photo.name);
+
+    // Upload photo to Firebase Storage
+    const uploadTask = storageRef.put(photo);
+
+    // After photo upload completes
+    uploadTask.on('state_changed', 
+      (snapshot) => {
+        // Track upload progress
+      }, 
+      (error) => {
+        console.error('Error uploading photo:', error);
+      }, 
+      () => {
+        // Photo uploaded successfully, now get its download URL
+        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+          // Save data to Firebase Database
+          database.ref('products').push({
+            description: description,
+            quantity: quantity,
+            price: price,
+            category: category,
+            photoURL: downloadURL // Save photo download URL
+          });
+          // Clear form inputs after submission
+          document.getElementById("description").value = "";
+          document.getElementById("quantity").value = "";
+          document.getElementById("price").value = "";
+          document.getElementById("category").selectedIndex = 0;
+          document.getElementById("photo").value = "";
+          alert("Product uploaded successfully!"); // Display success message
+        });
+      }
+    );
+  });
+
+  // Existing code from the first script goes here
+  document.addEventListener("DOMContentLoaded", function() {
+    const navbarToggle = document.querySelector(".navbar-toggle");
+    const navLinks = document.querySelector("nav ul");
+    const header = document.querySelector("header");
+
+    navbarToggle.addEventListener("click", function() {
+      navLinks.classList.toggle("open"); // Toggle the 'open' class
+    });
+
+    window.addEventListener("scroll", function() {
+      if (window.scrollY > header.offsetTop) {
+        header.classList.add("scroll-blur");
+      } else {
+        header.classList.remove("scroll-blur");
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

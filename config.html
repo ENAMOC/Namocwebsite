@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+</head>
+<body>
+
+<div class="container">
+    <h2>Register</h2>
+    <form id="registrationForm">
+        <input type="text" id="username" name="username" placeholder="Username" required>
+        <input type="password" id="password" name="password" placeholder="Password" required>
+        <input type="submit" value="Register">
+    </form>
+</div>
+
+<!-- Include Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+  apiKey: "AIzaSyCdvETmJITLCx0eg_q30LJur1yThCuuLMo",
+  authDomain: "ecommerce-5f863.firebaseapp.com",
+  databaseURL: "https://ecommerce-5f863-default-rtdb.firebaseio.com",
+  projectId: "ecommerce-5f863",
+  storageBucket: "ecommerce-5f863.appspot.com",
+  messagingSenderId: "391256408389",
+  appId: "1:391256408389:web:9a2a093e3a7449d9a47e2c"
+};
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  // Get a reference to the database service
+  const database = firebase.database();
+
+  // Handle form submission
+  document.getElementById("registrationForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent default form submission behavior
+
+    // Get form values
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    // Save data to Firebase
+    database.ref('users').push({
+      username: username,
+      password: password
+    });
+
+    // Clear form inputs after submission
+    document.getElementById("username").value = "";
+    document.getElementById("password").value = "";
+
+    alert("Registration successful!"); // Display success message
+  });
+</script>
+
+</body>
+</html>

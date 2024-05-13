@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Website</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+  /* General styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: transparent; /* Transparent background */
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  display: flex; /* Display as flex */
+  justify-content: space-evenly; /* Space content evenly */
+  align-items: center; /* Center align items vertically */
+}
+
+
+header .logo {
+    margin-left: -100px;
+}
+
+  
+
+
+/* Blur effect when scrolling past the header */
+.scroll-blur {
+  backdrop-filter: blur(10px); /* Add blur effect */
+  background-color: transparent; /* Adjust transparency */
+}
+
+nav {
+  padding: 5px 0;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+main {
+  padding: 20px;
+}
+
+section {
+  margin-bottom: 20px;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.home {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url("../image/main.jpg");
+  background-position: bottom center;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.navbar-toggle {
+  display: none;
+}
+
+
+   .home .cart-container {
+            width:85%;
+            margin: 50px auto;
+            padding: 20px;
+            margin-top: -500px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .cart-item {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+        .cart-item img {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .cart-item-details {
+            display: flex;
+            align-items: center;
+        }
+        .cart-item-description {
+            flex: 1;
+        }
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+        }
+        .cart-item-remove {
+            color: #ff0000;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        .cart-item-remove:hover {
+            text-decoration: underline;
+        }
+        .total {
+            margin-top: 20px;
+            text-align: right;
+        }
+
+     .cart-item-details img {
+       width: 100px;
+       height: 100px;
+     }
+
+
+header .logo img {
+  width: 50px;
+  margin-left: -80px;
+}
+
+
+@media screen and (max-width: 768px) {
+  
+   header {
+    padding: 5px; /* Adjust padding for smaller screens */
+    height: 50px;
+  }
+  
+  header .logo {
+    margin-left: -100px;
+}
+
+  
+  
+
+  nav ul {
+  display: none;
+  position:absolute;
+  top: 100%; /* Position below the header */
+  left: 0;
+  width: 100%;
+  text-align: right; /* Align text to the right */
+  backdrop-filter: blur(10px); /* Add blur effect */
+}
+
+
+  nav ul.open {
+    display: block;
+  }
+
+  nav ul li {
+    display: block;
+    margin: 10px 0;
+    margin-right: 20px;
+  }
+
+  .navbar-toggle {
+    display: block;
+    position: absolute;
+    top: 50%; /* Position in the middle of the header */
+    right: 20px;
+    transform: translateY(-50%);
+    font-size: 20px;
+  }
+  
+  
+  
+  .home .cart-container {
+        width:85%;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      
+  
+}
+
+</style>
+
+<body>
+
+<header>
+  <div class="logo">
+    <img src="../image/logo.png" alt="Logo">
+  </div>
+
+  
+  
+  
+  
+  <nav>
+    <div class="navbar-toggle">&#9776;</div> <!-- Toggle Button -->
+    <ul>
+         <li><a href="../user_welcomefinal.html">Home</a></li>
+         <li><a href="../user_finaladdtocart.html">Products</a></li>
+         <li><a href="../user_cartfinal.html">Cart</a></li>
+         <li><a href="#">Checkout</a></li>
+         <li><a href="../index.html">Logout</a></li>
+       </ul>
+  </nav>
+</header>
+
+<div class="home">
+  
+  <div class="cart-container">
+    <h2>Shopping Cart</h2>
+    <div id="cartItems">
+      <!-- Cart items will be dynamically added here -->
+    </div>
+    <button onclick="clearCart()">Clear Cart</button>
+  </div>
+  
+
+</div>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+<footer>
+  <p>&copy; 2024, Namoc Website. All rights reserved.</p>
+</footer>
+
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+<script>
+  // Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyCdvETmJITLCx0eg_q30LJur1yThCuuLMo",
+    authDomain: "ecommerce-5f863.firebaseapp.com",
+    databaseURL: "https://ecommerce-5f863-default-rtdb.firebaseio.com",
+    projectId: "ecommerce-5f863",
+    storageBucket: "ecommerce-5f863.appspot.com",
+    messagingSenderId: "391256408389",
+    appId: "1:391256408389:web:9a2a093e3a7449d9a47e2c"
+  };
+ 
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  // Get a reference to the database service
+  const database = firebase.database();
+  const storage = firebase.storage();
+
+  // Function to remove an item from the cart
+  function removeFromCart(productId) {
+    let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Find the index of the item in the cart
+    const itemIndex = cartItems.findIndex(item => item.id === productId);
+
+    if (itemIndex !== -1) {
+      // If the item is found, remove it from the cart
+      const removedItem = cartItems.splice(itemIndex, 1)[0];
+
+      // Save the updated cart to localStorage
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+
+      // Update the cart display
+      displayCart();
+
+      // Update the product quantity in the database
+      const productRef = firebase.database().ref('products/' + productId);
+      productRef.once('value', function(snapshot) {
+        const product = snapshot.val();
+        if (product) {
+          const newQuantity = product.quantity + removedItem.quantity;
+          productRef.update({ quantity: newQuantity })
+            .then(function() {
+              console.log('Product quantity updated successfully.');
+            })
+            .catch(function(error) {
+              console.error('Error updating product quantity:', error);
+            });
+        }
+      });
+    }
+  }
+
+  // Function to clear the cart
+  function clearCart() {
+    localStorage.removeItem('cart');
+    displayCart();
+  }
+
+  // Function to display cart items
+  function displayCart() {
+    const cartItemsContainer = document.getElementById('cartItems');
+    cartItemsContainer.innerHTML = '';
+
+    let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+    cartItems.forEach(item => {
+      const cartItemDiv = document.createElement('div');
+      cartItemDiv.classList.add('cart-item');
+      cartItemDiv.innerHTML = `
+        <div class="cart-item-details">
+          <img src="${item.photoURL}" alt="Product Image">
+          <div class="cart-item-description">
+            <p>${item.description}</p>
+            <p>Price: P${item.price}</p>
+            <p>Quantity: ${item.quantity}</p>
+          </div>
+        </div>
+        <div class="cart-item-actions">
+          <button class="cart-item-remove" onclick="removeFromCart('${item.id}')">Remove</button>
+        </div>
+      `;
+      cartItemsContainer.appendChild(cartItemDiv);
+    });
+
+    if (cartItems.length === 0) {
+      cartItemsContainer.innerHTML = '<p>Your shopping cart is empty.</p>';
+    }
+  }
+
+  // Function to handle checkout
+  function checkout() {
+    // Save transaction data into the database
+    saveTransactionData();
+  }
+
+  // Function to save transaction data into the database
+  function saveTransactionData() {
+    let cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    let transactionData = {
+      items: cartItems,
+      totalAmount: calculateTotalAmount(cartItems),
+      timestamp: firebase.database.ServerValue.TIMESTAMP // Timestamp of the transaction
+    };
+
+    // Save transaction data to the database
+    firebase.database().ref('checkout').push(transactionData)
+      .then(function() {
+        alert('Checkout completed!');
+        clearCart(); // Clear the cart after successful transaction
+        window.location.href = 'summary.html '; // Redirect to summary page
+      })
+      .catch(function(error) {
+        console.error('Error saving transaction data:', error);
+        alert('Failed to complete checkout. Please try again later.');
+      });
+  }
+  
+  // Function to calculate total amount of the transaction
+  function calculateTotalAmount(items) {
+    let totalPrice = items.reduce((total, item) => total + (item.price * item.quantity), 0);
+    return totalPrice;
+  }
+
+  // Initial load of cart items
+  displayCart();
+</script>
+
+
+
+</body>
+</html>
