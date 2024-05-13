@@ -403,6 +403,26 @@ header .logo img {
   displayCart();
 </script>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const navbarToggle = document.querySelector(".navbar-toggle");
+    const navLinks = document.querySelector("nav ul");
+    const header = document.querySelector("header");
+
+    navbarToggle.addEventListener("click", function() {
+      navLinks.classList.toggle("open"); // Toggle the 'open' class
+    });
+
+    window.addEventListener("scroll", function() {
+      if (window.scrollY > header.offsetTop) {
+        header.classList.add("scroll-blur");
+      } else {
+        header.classList.remove("scroll-blur");
+      }
+    });
+  });
+</script>
+
 
 
 </body>
